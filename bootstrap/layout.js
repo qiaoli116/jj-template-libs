@@ -1,5 +1,5 @@
 // js break point handler for responsive design
-// Alian with bootstrap layout setting. Tested with bootstrap 4.0
+// Align with bootstrap layout setting. Tested with bootstrap 4.0
 // Version 1.0
 // Auther: Qiao Li
 // Latest update on: 02/28/2018
