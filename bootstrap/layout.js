@@ -11,18 +11,18 @@
 //          function md (){console.log("func md")}
 //          function sm (){console.log("func sm")}
 //          function xs (){console.log("func xs")}
-//  3) in window.ready callback, create a instance of class btLayoutJS and invoke the toGo() Method. 
-//          var x = new btLayoutJS(xl, lg, md, sm, xs);
-//          x.toGo();
+//  3) in window.ready callback, create a instance of class bsLayoutJS. 
+//          var x = new bsLayoutJS(xl, lg, md, sm, xs);
 //  4) resize the web page window to test.
 //  Note: the code is coded in jQuery style, because this class is designed for bootstrap layout and jQuery is a default lib for bootstrap. avoid using this code when jQuery is not included.
-class btLayoutJS {
+class bsLayoutJS {
     constructor (xl, lg, md, sm, xs){
         this.styleXl = xl;
         this.styleLg = lg;
         this.styleMd = md;
         this.styleSm = sm;
         this.styleDefault = xs;
+        this.toGo();
     }
     // function toGo: launch the main function
     toGo (){
