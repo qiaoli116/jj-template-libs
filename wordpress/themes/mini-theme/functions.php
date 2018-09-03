@@ -119,4 +119,11 @@ add_action( 'wp_enqueue_scripts', 'my_enqueue_bs_assets' );
 //add_image_size( 'home_slider_pad', '768', '464', [ "center", "bottom"] ); 
 //add_image_size( 'home_slider_phone', '576', '350', [ "center", "bottom"] );
 
+// register menu
+function register_my_menu() {
+    register_nav_menu('header-menu',__( 'Header Menu' ));
+    register_nav_menu('footer-menu',__( 'Footer Menu' ));
+}
+add_action( 'init', 'register_my_menu' );
+
 ?>
