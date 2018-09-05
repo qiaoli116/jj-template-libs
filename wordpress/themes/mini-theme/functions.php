@@ -126,4 +126,18 @@ function register_my_menu() {
 }
 add_action( 'init', 'register_my_menu' );
 
+// register widget
+function mat_widget_areas() {
+    register_sidebar( array(
+        'name' => 'Theme Sidebar',
+        'id' => 'mat-sidebar',
+        'description' => 'this is a widget example',
+        'before_widget' => '<li id="%1$s" class="widget %2$s">',
+		'after_widget'  => '</li>',
+		'before_title'  => '<h3 class="widget-title">',
+		'after_title'   => '</h3>',
+    ));
+}
+add_action( 'widgets_init', 'mat_widget_areas' );
+
 ?>
