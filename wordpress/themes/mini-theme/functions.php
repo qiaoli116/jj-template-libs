@@ -84,17 +84,16 @@ add_filter('template_include', 'define_current_template', 1000);
  */
 
 function my_enqueue_bs_assets() {
-    // below is a bootstrap, google font, font awesome template
-    wp_enqueue_style('bs-style', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css', array(), null);
-    wp_enqueue_script('fa-script','https://use.fontawesome.com/releases/v5.0.1/js/all.js', array(), null);
-    wp_enqueue_style('google-font', 'https://fonts.googleapis.com/css?family=Raleway:800', array(), null);
-    wp_enqueue_style('header-footer', get_template_directory_uri() . '/css/header_footer.css', array('bs-style'), null);
+wp_enqueue_style('bs-style', 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css', array(), null);
+    //wp_enqueue_script('fa-script','https://use.fontawesome.com/releases/v5.0.1/js/all.js', array(), null);
+    //wp_enqueue_style('google-font', 'https://fonts.googleapis.com/css?family=Raleway:800', array(), null);
+    //wp_enqueue_style('header-footer', get_template_directory_uri() . '/css/header_footer.css', array('bs-style'), null);
 
-    wp_enqueue_script('bs-jquery', 'https://code.jquery.com/jquery-3.2.1.min.js', array(), null, true);
-    wp_enqueue_script('bs-popper', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js', array('bs-jquery'), null, true);
-    wp_enqueue_script('bs-js', 'https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js', array('bs-popper'), null, true);
+    wp_enqueue_script('bs-jquery', 'https://code.jquery.com/jquery-3.3.1.min.js', array(), null, true);
+    wp_enqueue_script('bs-popper', 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js', array('bs-jquery'), null, true);
+    wp_enqueue_script('bs-js', 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js', array('bs-popper'), null, true);
     wp_enqueue_script('m-layout-js', get_template_directory_uri() . '/js/layout.js', array('bs-jquery'), null, true);
-    //wp_enqueue_script('m-layout-hf', get_template_directory_uri() . '/js/header_footer.js', array('m-layout-js', 'bs-jquery'), null, true);
+	//wp_enqueue_script('m-layout-hf', get_template_directory_uri() . '/js/header_footer.js', array('m-layout-js', 'bs-jquery'), null, true);
 
     if (get_current_template() == 'index.php') {
         wp_enqueue_style('index-style', get_template_directory_uri() . '/css/index.css', array(), null);
