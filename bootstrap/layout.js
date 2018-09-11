@@ -6,17 +6,17 @@
 // How to use:
 //  1) include "layout.js" in html
 //  2) define 5 style functions for callbacks
-//          function xl (){console.log("func xl")}
-//          function lg (){console.log("func lg")}
-//          function md (){console.log("func md")}
-//          function sm (){console.log("func sm")}
-//          function xs (){console.log("func xs")}
-//  3) in window.ready callback, create a instance of class bsLayoutJS. 
-//          var x = new bsLayoutJS(xl, lg, md, sm, xs);
+//          function xl (s0){console.log("func xl");}
+//          function lg (s0){console.log("func lg");}
+//          function md (s0){console.log("func md");}
+//          function sm (s0){console.log("func sm");}
+//          function xs (s0){console.log("func xs");}
+//  3) in window.ready callback, create a instance of class btLayoutJS and invoke the toGo() Method. 
+//          var x = new btLayoutJS(xl, lg, md, sm, xs);
 //  4) resize the web page window to test.
 //  Note: the code is coded in jQuery style, because this class is designed for bootstrap layout and jQuery is a default lib for bootstrap. avoid using this code when jQuery is not included.
-class bsLayoutJS {
-    constructor (xl, lg, md, sm, xs){
+class btLayoutJS {
+    constructor (xl=null, lg=null, md=null, sm=null, xs=null){
         this.styleXl = xl;
         this.styleLg = lg;
         this.styleMd = md;
@@ -39,7 +39,7 @@ class bsLayoutJS {
 
                 if(s1 !== s0){
                     // new setting
-                    obj.mBootstrapStyle(s1);
+                    obj.mBootstrapStyle(s1, s0);
                 }
 
                 // update width
@@ -47,6 +47,9 @@ class bsLayoutJS {
             };
         }
         $(window).resize(resizeHandler(this));
+    }
+    getSize() {
+        return this.mBootstrapDeviceSize(window.innerWidth);
     }
     // function mBootstrapDeviceSize: determine the size of current window
     mBootstrapDeviceSize(w){
@@ -65,47 +68,47 @@ class bsLayoutJS {
         return s;
     }
     // function mBootstrapStyle: call the style call backs to style the document
-    mBootstrapStyle (bp){
-        switch (bp) {
+    mBootstrapStyle (s1, s0){
+        switch (s1) {
             case "xl":
                 // 1200px <= width < infinity
-                console.log("xl");
+
                 // style your document here ...
                 if(typeof this.styleXl === "function") {
-                    this.styleXl();
+                    this.styleXl(s0);
                 }
                 break;
             case "lg":
                 // 992px <= width < 1200px
-                console.log("lg");
+
                 // style your document here ...
                 if(typeof this.styleLg === "function") {
-                    this.styleLg();
+                    this.styleLg(s0);
                 }
                 break;
             case "md":
                 // 768px <= width < 992px
-                console.log("md");
+
                 // style your document here ...
                 if(typeof this.styleMd === "function") {
-                    this.styleMd();
+                    this.styleMd(s0);
                 }
                 break;
             case "sm":
                 // 576px <= width < 768px
-                console.log("sm");
+
                 // style your document here ...
                 if(typeof this.styleSm === "function") {
-                    this.styleSm();
+                    this.styleSm(s0);
                 }
                 break;
             default:
                 // case "xs"
                 // 0 <= width < 576px
-                console.log("xs (default)");
+
                 // style your document here ...
                 if(typeof this.styleDefault === "function") {
-                    this.styleDefault();
+                    this.styleDefault(s0);
                 }
                 break;
 
