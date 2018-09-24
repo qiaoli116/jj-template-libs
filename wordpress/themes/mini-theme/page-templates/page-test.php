@@ -1,6 +1,6 @@
 <?php
 
-/*Template Name: Contact
+/*Template Name: Test Page
 */
 d("page-test.php");
 ?>
