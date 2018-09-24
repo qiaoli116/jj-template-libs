@@ -126,7 +126,7 @@ function register_my_menu() {
 add_action( 'init', 'register_my_menu' );
 
 // register widget
-function mat_widget_areas() {
+function reg_widget_areas() {
     register_sidebar( array(
         'name' => 'Theme Sidebar',
         'id' => 'mat-sidebar',
@@ -137,6 +137,13 @@ function mat_widget_areas() {
 		'after_title'   => '</h3>',
     ));
 }
-add_action( 'widgets_init', 'mat_widget_areas' );
+add_action( 'widgets_init', 'reg_widget_areas' );
+
+// upload svg
+function cc_mime_types($mimes) {
+    $mimes['svg'] = 'image/svg+xml';
+    return $mimes;
+}
+add_filter('upload_mimes', 'cc_mime_types');
 
 ?>

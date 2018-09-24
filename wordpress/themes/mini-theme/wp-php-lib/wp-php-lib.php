@@ -75,6 +75,18 @@ function zdateRelative($date){
 }
 
 
+// define function of get_dynamic_sidebar
+if (!function_exists('get_dynamic_sidebar')) {
+    function get_dynamic_sidebar($sidebar_id)
+    {
+        ob_start();
+        dynamic_sidebar($sidebar_id);
+        $out = ob_get_contents();
+        ob_end_clean();
+        return $out;
+    }
+}
+
 
 
 
