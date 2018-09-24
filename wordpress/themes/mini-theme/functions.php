@@ -12,7 +12,7 @@ function getNav($menu, &$result) {
     foreach ($menu as $v) {
         $result .= "<li><a href='{$v->url}'>{$v->title}</a></li>";
         if (isset($v->wpse_children)) {
-            printTree($v->wpse_children, $result);
+            getNav($v->wpse_children, $result);
         }
     }
     $result .= '</ul>';
