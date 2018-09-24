@@ -4,7 +4,7 @@ $d_flag = 0;
 // call wpse_nav_menu_2_tree to build a tree of nav
 /* 
 // define a getNav like below
-// $menu is the return value of wpse_nav_menu_2_tree
+// $menu is the result value of wpse_nav_menu_2_tree
 // $result is the html doc to echo
 
 function getNav($menu, &$result) {
@@ -19,9 +19,9 @@ function getNav($menu, &$result) {
 }
 
 $mItem = wpse_nav_menu_2_tree('Menu 1');
-$retult = '';
-getNav($mItem, $retult);
-echo $retult;
+$result = '';
+getNav($mItem, $result);
+echo $result;
 */
 
 function buildTree( array &$elements, $parentId = 0 ) {
