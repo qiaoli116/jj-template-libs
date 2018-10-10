@@ -1,88 +1,10 @@
 <?php
 require_once("wp-php-lib/wp-php-lib.php");
 $d_flag = 0;
-// call wpse_nav_menu_2_tree to build a tree of nav
-/* 
-// define a getNav like below
-// $menu is the result value of wpse_nav_menu_2_tree
-// $result is the html doc to echo
 
-function getNav($menu, &$result) {
-    $result .= '<ul>';
-    foreach ($menu as $v) {
-        $result .= "<li><a href='{$v->url}'>{$v->title}</a></li>";
-        if (isset($v->wpse_children)) {
-            getNav($v->wpse_children, $result);
-        }
-    }
-    $result .= '</ul>';
-}
-
-$mItem = wpse_nav_menu_2_tree('Menu 1');
-$result = '';
-getNav($mItem, $result);
-echo $result;
-*/
-
-function buildTree( array &$elements, $parentId = 0 ) {
-    $branch = array();
-    foreach ( $elements as &$element ) {
-        if ( $element->menu_item_parent == $parentId ) {
-            $children = buildTree( $elements, $element->ID );
-            if ( $children ) {
-                $element->wpse_children = $children;
-            }
-
-            $branch[$element->ID] = $element;
-            unset( $element );
-        }
-    }
-    return $branch;
-}
-function wpse_nav_menu_2_tree( $menu_id )
-{
-    $items = wp_get_nav_menu_items( $menu_id );
-    return  $items ? buildTree( $items, 0 ) : null;
-}
-
-/**
- * Get Current Theme Template Filename
- *
- * Get's the name of the current theme template file being used
- *
- * @global $current_theme_template Defined using define_current_template()
- * @param $echo Defines whether to return or print the template filename
- * @return The name of the template filename, including .php
- */
-function get_current_template( $echo = false ) {
-    if ( !isset( $GLOBALS['current_theme_template'] ) ) {
-        trigger_error( '$current_theme_template has not been defined yet', E_USER_WARNING );
-        return false;
-    }
-    if ( $echo ) {
-        echo $GLOBALS['current_theme_template'];
-    }
-    else {
-        return $GLOBALS['current_theme_template'];
-    }
-}
-
-/*
- * add define current_theme_template in $GLOBALS as the theme template name called 
- */
-function define_current_template( $template ) {
-    //trigger_error( 'define_current_template called', E_USER_WARNING );
-    $GLOBALS['current_theme_template'] = basename($template);
-
-    return $template;
-}
-add_filter('template_include', 'define_current_template', 1000);
-
-
-/*
- * add js, css to head and footer
- */
-
+/**************************************/
+/* Hook Section 1: wp_enqueue_scripts */
+/**************************************/
 function my_enqueue_bs_assets() {
     wp_enqueue_style('bootstrap-css', 'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css', array(), null);
     //wp_enqueue_script('fa-script','https://use.fontawesome.com/releases/v5.0.1/js/all.js', array(), null);
@@ -115,19 +37,26 @@ function my_enqueue_bs_assets() {
 }
 add_action( 'wp_enqueue_scripts', 'my_enqueue_bs_assets' );
 
+/**************************************/
+/* Hook Section 2: add_image_size     */
+/**************************************/
 // define image size
-//add_image_size( 'home_slider_desktop', '1750', '464', [ "center", "bottom"] ); 
-//add_image_size( 'home_slider_pad', '768', '464', [ "center", "bottom"] ); 
-//add_image_size( 'home_slider_phone', '576', '350', [ "center", "bottom"] );
+add_image_size( 'home_slider_desktop', '1750', '464', [ "center", "bottom"] ); 
+add_image_size( 'home_slider_pad', '768', '464', [ "center", "bottom"] ); 
+add_image_size( 'home_slider_phone', '576', '350', [ "center", "bottom"] );
 
-// register menu
+/**************************************/
+/* Hook Section 3: register_nav_menu  */
+/**************************************/
 function register_my_menu() {
     register_nav_menu('header-menu',__( 'Header Menu' ));
     register_nav_menu('footer-menu',__( 'Footer Menu' ));
 }
 add_action( 'init', 'register_my_menu' );
 
-// register widget
+/**************************************/
+/* Hook Section 4: Register widget    */
+/**************************************/
 function reg_widget_areas() {
     register_sidebar( array(
         'name' => 'Theme Sidebar',
@@ -141,7 +70,9 @@ function reg_widget_areas() {
 }
 add_action( 'widgets_init', 'reg_widget_areas' );
 
-// upload svg
+/**************************************/
+/* Hook Section 5: Enable svg upload  */
+/**************************************/
 function cc_mime_types($mimes) {
     $mimes['svg'] = 'image/svg+xml';
     return $mimes;

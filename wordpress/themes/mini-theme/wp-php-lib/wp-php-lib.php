@@ -75,18 +75,126 @@ function zdateRelative($date){
 }
 
 
-// define function of get_dynamic_sidebar
-if (!function_exists('get_dynamic_sidebar')) {
-    function get_dynamic_sidebar($sidebar_id)
-    {
-        ob_start();
-        dynamic_sidebar($sidebar_id);
-        $out = ob_get_contents();
-        ob_end_clean();
-        return $out;
+/**
+ * @param $sidebar_id side bar id
+ * @return string: html output
+ */
+function get_dynamic_sidebar($sidebar_id)
+{
+    ob_start();
+    dynamic_sidebar($sidebar_id);
+    $out = ob_get_contents();
+    ob_end_clean();
+    return $out;
+}
+
+
+// call wpse_nav_menu_2_tree to build a tree of nav
+/* 
+// define a getNav like below
+// $menu is the return value of wpse_nav_menu_2_tree
+// $result is the html doc to echo
+
+function getNav($menu, &$result) {
+    $result .= '<ul>';
+    foreach ($menu as $v) {
+        $result .= "<li><a href='{$v->url}'>{$v->title}</a></li>";
+        if (isset($v->wpse_children)) {
+            getNav($v->wpse_children, $result);
+        }
+    }
+    $result .= '</ul>';
+}
+
+$mItem = wpse_nav_menu_2_tree('Menu 1');
+$retult = '';
+getNav($mItem, $retult);
+echo $retult;
+*/
+
+/**
+ * reconstruct the out array of wp_get_nav_menu_items and build a tree structure
+ * @param &$elements generate by wp_get_nav_menu_items()
+ * @param $parentId parent menu item id of current menu item
+ * @return array: menu in tree structure
+ */
+function buildTree( array &$elements, $parentId = 0 ) {
+    $branch = array();
+    foreach ( $elements as &$element ) {
+        if ( $element->menu_item_parent == $parentId ) {
+            $children = buildTree( $elements, $element->ID );
+            if ( $children ) {
+                $element->wpse_children = $children;
+            }
+
+            $branch[$element->ID] = $element;
+            unset( $element );
+        }
+    }
+    return $branch;
+}
+/**
+ * reconstruct the out array of wp_get_nav_menu_items and build a tree structure by calling buildTree
+ * @param $menu_id name of menu
+ * @return array: menu in tree structure
+ */
+function wpse_nav_menu_2_tree( $menu_id ){
+    $items = wp_get_nav_menu_items( $menu_id );
+    return  $items ? buildTree( $items, 0 ) : null;
+    /* Steps of using "wpse_nav_menu_2_tree" to generate a html menu
+    // define a getNav like below
+
+    // step 1: define a getNav like below
+    // $menu is the return value of wpse_nav_menu_2_tree
+    // $result is the html doc to echo
+    function getNav($menu, &$result) {
+        $result .= '<ul>';
+        foreach ($menu as $v) {
+            $result .= "<li><a href='{$v->url}'>{$v->title}</a></li>";
+            if (isset($v->wpse_children)) {
+                getNav($v->wpse_children, $result);
+            }
+        }
+        $result .= '</ul>';
+    }
+    // step 2: call wpse_nav_menu_2_tree to build a tree of nav
+    $mItem = wpse_nav_menu_2_tree('Menu 1');
+    $retult = '';
+    getNav($mItem, $retult);
+    echo $retult;
+    */
+}
+
+/**
+ * Get Current Theme Template Filename
+ * Get's the name of the current theme template file being used
+ * @global $current_theme_template Defined using define_current_template()
+ * @param $echo Defines whether to return or print the template filename
+ * @return The name of the template filename, including .php
+ */
+function get_current_template( $echo = false ) {
+    if ( !isset( $GLOBALS['current_theme_template'] ) ) {
+        trigger_error( '$current_theme_template has not been defined yet', E_USER_WARNING );
+        return false;
+    }
+    if ( $echo ) {
+        echo $GLOBALS['current_theme_template'];
+    }
+    else {
+        return $GLOBALS['current_theme_template'];
     }
 }
 
+/*
+ * add define current_theme_template in $GLOBALS as the theme template name called 
+ */
+function define_current_template( $template ) {
+    //trigger_error( 'define_current_template called', E_USER_WARNING );
+    $GLOBALS['current_theme_template'] = basename($template);
+
+    return $template;
+}
+add_filter('template_include', 'define_current_template', 1000);
 
 
 
