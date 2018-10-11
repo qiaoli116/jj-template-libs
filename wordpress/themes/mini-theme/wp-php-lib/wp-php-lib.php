@@ -88,30 +88,6 @@ function get_dynamic_sidebar($sidebar_id)
     return $out;
 }
 
-
-// call wpse_nav_menu_2_tree to build a tree of nav
-/* 
-// define a getNav like below
-// $menu is the return value of wpse_nav_menu_2_tree
-// $result is the html doc to echo
-
-function getNav($menu, &$result) {
-    $result .= '<ul>';
-    foreach ($menu as $v) {
-        $result .= "<li><a href='{$v->url}'>{$v->title}</a></li>";
-        if (isset($v->wpse_children)) {
-            getNav($v->wpse_children, $result);
-        }
-    }
-    $result .= '</ul>';
-}
-
-$mItem = wpse_nav_menu_2_tree('Menu 1');
-$retult = '';
-getNav($mItem, $retult);
-echo $retult;
-*/
-
 /**
  * reconstruct the out array of wp_get_nav_menu_items and build a tree structure
  * @param &$elements generate by wp_get_nav_menu_items()
@@ -142,7 +118,6 @@ function wpse_nav_menu_2_tree( $menu_id ){
     $items = wp_get_nav_menu_items( $menu_id );
     return  $items ? buildTree( $items, 0 ) : null;
     /* Steps of using "wpse_nav_menu_2_tree" to generate a html menu
-    // define a getNav like below
 
     // step 1: define a getNav like below
     // $menu is the return value of wpse_nav_menu_2_tree

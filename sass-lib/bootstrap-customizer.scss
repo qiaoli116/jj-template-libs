@@ -1,0 +1,29 @@
+/*
+ * The functions defiend in this file are used to customize bootstrap
+ */
+
+/*
+ * Function "container_mw"
+ * modify the default bootstrap max-width value for containers
+ */
+ @mixin container_mw ($xl, $lg, $md, $sm) {
+    // bootstrap default
+    // @include container_mw (1140px, 960px, 720px, 540px)
+    .container {
+        @media (min-width: 576px) { 
+            max-width: $sm;
+        }
+
+        @media (min-width: 768px) {
+            max-width: $md;
+        }
+
+        @media (min-width: 992px){ 
+            max-width: $lg;
+        }
+
+        @media (min-width: 1200px) { 
+            max-width: $xl;
+        }
+    }
+}

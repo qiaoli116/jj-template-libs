@@ -1,0 +1,147 @@
+
+/* Function "clear_h_p_padding_margin"
+ * clear all padding, margin values for hx tages and p tag
+ */
+@mixin clear_h_p_padding_margin {
+    h1,h2,h3,h4,h5,h6, p{
+        padding: 0;
+        margin: 0;
+    }
+}
+
+/* Function "absFull"
+ * position absolute and then full size
+ */
+@mixin absFull {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+/* Function 
+ * "absLeftTop"     "absCenterTop"      "absRightTop"
+ * "absLeftCenter"  "absCenterCenter"   "absRightCenter"
+ * "absLeftBottom"  "absCenterBottom"   "absRightBottom"
+ * position absolute and then set the position
+ */
+
+/* absLeftTop
+    +--
+    ---
+    ---
+ */
+@mixin absLeftTop ($l, $t) {
+    position: absolute;
+    left: $l;
+    top: $t;
+}
+/* absCenterTop
+    -+-
+    ---
+    ---
+ */
+@mixin absCenterTop($t) {
+    position: absolute;
+    left: 50%;
+    top: $t;
+    transform: translate(-50%, 0);
+}
+/* absRightTop
+    --+
+    ---
+    ---
+ */
+@mixin absRightTop ($r, $t) {
+    position: absolute;
+    top: $t;
+    right: $r;
+}
+/* absLeftCenter
+    ---
+    +--
+    ---
+ */
+@mixin absLeftCenter($l) {
+    position: absolute;
+    left: $l;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+/* absCenterCenter
+    ---
+    -+-
+    ---
+ */
+@mixin absCenterCenter {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+/* absRightCenter
+    ---
+    --+
+    ---
+ */
+@mixin absRightCenter($r) {
+    position: absolute;
+    right: $r;
+    top: 50%;
+    transform: translate(0, -50%);
+}
+/* absLeftBottom
+    ---
+    ---
+    +--
+ */
+@mixin absLeftBottom ($l, $b){
+    position: absolute;
+    left: $l;
+    bottom: $b;
+}
+/* absCenterBottom
+    ---
+    ---
+    -+-
+ */
+@mixin absCenterBottom ($b) {
+    position: absolute;
+    left: 50%;
+    bottom: $b;
+    transform: translate(-50%, 0);
+}
+/* absRightBottom
+    ---
+    ---
+    --+
+ */
+@mixin absRightBottom ($r, $b) {
+    position: absolute;
+    right: $r;
+    bottom: $b;
+}
+
+/* Function "transHoverCBg" "transHover"
+ * set transition value
+ */
+$transHoverTime : 200ms;
+@mixin transHoverCBg () {
+    transition: color $transHoverTime ease-in, background-color $transHoverTime ease-in;
+}
+@mixin transHover ($attr) {
+    transition: $attr $transHoverTime ease-in;
+}
+
+
+/* Function "userSelect"
+ * set user-select value
+ */
+@mixin userSelect($v) {
+    -webkit-user-select: none; /* Safari 3.1+ */
+    -moz-user-select: none; /* Firefox 2+ */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none; /* Standard syntax */
+}
+
