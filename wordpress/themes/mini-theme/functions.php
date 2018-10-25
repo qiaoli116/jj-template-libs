@@ -41,9 +41,9 @@ add_action( 'wp_enqueue_scripts', 'my_enqueue_bs_assets' );
 /* Hook Section 2: add_image_size     */
 /**************************************/
 // define image size
-add_image_size( 'home_slider_desktop', '1750', '464', [ "center", "bottom"] ); 
-add_image_size( 'home_slider_pad', '768', '464', [ "center", "bottom"] ); 
-add_image_size( 'home_slider_phone', '576', '350', [ "center", "bottom"] );
+add_image_size( 'page_top_image_desktop', '1920', '500', [ "center", "bottom"] ); 
+add_image_size( 'page_top_image_pad', '768', '464', [ "center", "bottom"] ); 
+add_image_size( 'page_top_image_phone', '576', '350', [ "center", "bottom"] );
 
 /**************************************/
 /* Hook Section 3: register_nav_menu  */

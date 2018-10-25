@@ -2,7 +2,7 @@
 /* Function "clear_h_p_padding_margin"
  * clear all padding, margin values for hx tages and p tag
  */
-@mixin clear_h_p_padding_margin {
+ @mixin clear_h_p_padding_margin {
     h1,h2,h3,h4,h5,h6, p{
         padding: 0;
         margin: 0;
@@ -18,6 +18,7 @@
     left: 0;
     height: 100%;
     width: 100%;
+    transform: none;
 }
 
 /* Function 
@@ -32,20 +33,25 @@
     ---
     ---
  */
-@mixin absLeftTop ($l, $t) {
+@mixin absLeftTop ($l: 0, $t: 0) {
     position: absolute;
     left: $l;
+    right: auto;
     top: $t;
+    bottom: auto;
+    transform: none;
 }
 /* absCenterTop
     -+-
     ---
     ---
  */
-@mixin absCenterTop($t) {
+@mixin absCenterTop($t: 0) {
     position: absolute;
     left: 50%;
+    right: auto;
     top: $t;
+    bottom: auto;
     transform: translate(-50%, 0);
 }
 /* absRightTop
@@ -53,20 +59,25 @@
     ---
     ---
  */
-@mixin absRightTop ($r, $t) {
+@mixin absRightTop ($r: 0, $t: 0) {
     position: absolute;
-    top: $t;
+    left: auto;
     right: $r;
+    top: $t;
+    bottom: auto;
+    transform: none;
 }
 /* absLeftCenter
     ---
     +--
     ---
  */
-@mixin absLeftCenter($l) {
+@mixin absLeftCenter($l: 0) {
     position: absolute;
     left: $l;
+    right: auto;
     top: 50%;
+    bottom: auto;
     transform: translate(0, -50%);
 }
 /* absCenterCenter
@@ -77,7 +88,9 @@
 @mixin absCenterCenter {
     position: absolute;
     left: 50%;
+    right: auto;
     top: 50%;
+    bottom: auto;
     transform: translate(-50%, -50%);
 }
 /* absRightCenter
@@ -85,10 +98,12 @@
     --+
     ---
  */
-@mixin absRightCenter($r) {
+@mixin absRightCenter($r: 0) {
     position: absolute;
+    left: auto;
     right: $r;
     top: 50%;
+    bottom: auto;
     transform: translate(0, -50%);
 }
 /* absLeftBottom
@@ -96,19 +111,24 @@
     ---
     +--
  */
-@mixin absLeftBottom ($l, $b){
+@mixin absLeftBottom ($l: 0, $b: 0){
     position: absolute;
     left: $l;
+    right: auto;
+    top: auto;
     bottom: $b;
+    transform: none;
 }
 /* absCenterBottom
     ---
     ---
     -+-
  */
-@mixin absCenterBottom ($b) {
+@mixin absCenterBottom ($b: 0) {
     position: absolute;
     left: 50%;
+    right: auto;
+    top: auto;
     bottom: $b;
     transform: translate(-50%, 0);
 }
@@ -117,10 +137,13 @@
     ---
     --+
  */
-@mixin absRightBottom ($r, $b) {
+@mixin absRightBottom ($r: 0, $b: 0) {
     position: absolute;
+    left: auto;
     right: $r;
+    top: auto;
     bottom: $b;
+    transform: none;
 }
 
 /* Function "transHoverCBg" "transHover"

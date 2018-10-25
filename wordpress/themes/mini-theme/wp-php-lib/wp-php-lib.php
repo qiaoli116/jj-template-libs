@@ -148,6 +148,9 @@ function wpse_nav_menu_2_tree( $menu_id ){
  * @return The name of the template filename, including .php
  */
 function get_current_template( $echo = false ) {
+//    use this function like this
+//    if (get_current_template() == 'template-name.php')
+//        wp_enqueue_style ....
     if ( !isset( $GLOBALS['current_theme_template'] ) ) {
         trigger_error( '$current_theme_template has not been defined yet', E_USER_WARNING );
         return false;
@@ -159,7 +162,6 @@ function get_current_template( $echo = false ) {
         return $GLOBALS['current_theme_template'];
     }
 }
-
 /*
  * add define current_theme_template in $GLOBALS as the theme template name called 
  */
@@ -173,8 +175,49 @@ add_filter('template_include', 'define_current_template', 1000);
 
 
 
+/**
+ * Build a pagenation array
+ * @param $page_request Page number to request, can be any number
+ * @param $post_type Post type to request
+ * @param $post_per_page Number of post per page
+ * @return pagenation array or false if post type is not valid  
+ */
+function build_pagenation ($page_request, $post_type, $post_per_page) {
+	$page_request = intval($page_request);
+	if (!post_type_exists($post_type)) {
+		return false;
+	}
 
-
+	$pagenation = array (
+		'curr_page'     => false,
+		'first_page'    => false,
+		'last_page'     => false,
+		'prev_page'     => false,
+		'next_page'     => false,
+		'total_page'    => false,
+		'post_per_page' => false,
+		'total_post'    => false,
+	);
+	// step 0: get total number of post
+	$pagenation['total_post'] = intval(wp_count_posts($post_type)->publish);
+	// step 1: get total number of page
+	$option = array(
+		'posts_per_page' => $post_per_page,
+		'post_type' => $post_type,
+	);
+	$query = new WP_Query($option);
+	$pagenation['total_page'] = intval($query->max_num_pages);
+	// step 2: validate $page_request
+	$page_request = $page_request >= 1 && $page_request <= $pagenation['total_page'] ? $page_request : 1;
+	// step 3: calculate the following
+	$pagenation['curr_page'] = $page_request;
+	$pagenation['first_page'] = 1;
+	$pagenation['last_page'] = $pagenation['total_page'];
+	$pagenation['prev_page'] = $pagenation['curr_page'] <= $pagenation['first_page'] ? -1 : $pagenation['curr_page'] - 1;
+	$pagenation['next_page'] = $pagenation['curr_page'] >= $pagenation['last_page'] ? -1 : $pagenation['curr_page'] + 1;
+	$pagenation['post_per_page'] = $post_per_page;
+	return $pagenation;
+}
 
 
 
