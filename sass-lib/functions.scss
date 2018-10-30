@@ -146,6 +146,15 @@
     transform: none;
 }
 
+@mixin absClear ($p: relative, $l: auto, $r: auto, $t: auto, $b: auto, $trans: none) {
+    position: $p;
+    left: $l;
+    right: $r;
+    top: $t;
+    bottom: $b;
+    transform: $trans;
+}
+
 /* Function "transHoverCBg" "transHover"
  * set transition value
  */
