@@ -155,14 +155,11 @@
     transform: $trans;
 }
 
-/* Function "transHoverCBg" "transHover"
+/* Function "trans"
  * set transition value
  */
 $transHoverTime : 200ms;
-@mixin transHoverCBg () {
-    transition: color $transHoverTime ease-in, background-color $transHoverTime ease-in;
-}
-@mixin transHover ($attr) {
+@mixin trans ($attr) {
     transition: $attr $transHoverTime ease-in;
 }
 
