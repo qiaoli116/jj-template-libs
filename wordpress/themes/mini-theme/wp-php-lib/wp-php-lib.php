@@ -148,11 +148,8 @@ function wpse_nav_menu_2_tree( $menu_id ){
  * @return The name of the template filename, including .php
  */
 function get_current_template( $echo = false ) {
-//    use this function like this
-//    if (get_current_template() == 'template-name.php')
-//        wp_enqueue_style ....
     if ( !isset( $GLOBALS['current_theme_template'] ) ) {
-        trigger_error( '$current_theme_template has not been defined yet', E_USER_WARNING );
+        //trigger_error( '$current_theme_template has not been defined yet', E_USER_WARNING );
         return false;
     }
     if ( $echo ) {
@@ -162,6 +159,7 @@ function get_current_template( $echo = false ) {
         return $GLOBALS['current_theme_template'];
     }
 }
+
 /*
  * add define current_theme_template in $GLOBALS as the theme template name called 
  */
@@ -174,13 +172,8 @@ function define_current_template( $template ) {
 add_filter('template_include', 'define_current_template', 1000);
 
 
-
 /**
- * Build a pagenation array
- * @param $page_request Page number to request, can be any number
- * @param $post_type Post type to request
- * @param $post_per_page Number of post per page
- * @return pagenation array or false if post type is not valid  
+ * Build pagenation for archive pages
  */
 function build_pagenation ($page_request, $post_type, $post_per_page) {
 	$page_request = intval($page_request);

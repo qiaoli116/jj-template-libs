@@ -155,14 +155,13 @@
     transform: $trans;
 }
 
-/* Function "trans"
+/* Function "transHoverCBg" "transHover"
  * set transition value
  */
-$transHoverTime : 200ms;
 @mixin trans ($attr) {
+    $transTime : 200ms;
     transition: $attr $transHoverTime ease-in;
 }
-
 
 /* Function "userSelect"
  * set user-select value
@@ -173,4 +172,3 @@ $transHoverTime : 200ms;
     -ms-user-select: none; /* IE 10+ */
     user-select: none; /* Standard syntax */
 }
-
