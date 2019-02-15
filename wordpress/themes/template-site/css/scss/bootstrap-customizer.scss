@@ -1,0 +1,93 @@
+/*
+ * The functions defiend in this file are used to customize bootstrap
+ */
+
+/*
+ * Function "container_mw"
+ * modify the default bootstrap max-width value for containers
+ */
+ @mixin container_mw ($xl: 1140px, $lg: 960px, $md: 720px, $sm: 540px) {
+    // bootstrap default
+    // @include container_mw (1140px, 960px, 720px, 540px)
+    .container {
+        @media (min-width: 576px) { 
+            max-width: $sm;
+        }
+
+        @media (min-width: 768px) {
+            max-width: $md;
+        }
+
+        @media (min-width: 992px){ 
+            max-width: $lg;
+        }
+
+        @media (min-width: 1200px) { 
+            max-width: $xl;
+        }
+    }
+}
+
+/*
+ * Function "bs_css"
+ * 
+ */
+ @mixin bs_css ($attr, $xl, $lg, $md, $sm, $xs) {
+    #{$attr}: $xs;
+    @media (min-width: 576px) { 
+        #{$attr}: $sm;
+    }
+
+    @media (min-width: 768px) {
+        #{$attr}: $md;
+    }
+
+    @media (min-width: 992px){ 
+        #{$attr}: $lg;
+    }
+
+    @media (min-width: 1200px) { 
+        #{$attr}: $xl;
+    }
+
+}
+
+/*
+ * Function "bootstrapBtn"
+ * customize bootstrap btn
+ */
+@mixin bootstrapBtn( $color, $background, $border, 
+    $hover-color: $color, $hover-background: darken($background, 7.5%), $hover-border: darken($border, 10%),
+    $active-color: $color, $active-background: darken($background, 10%), $active-border: darken($border, 12.5%)) {
+    $btn-focus-width : 0px;
+    color: $color;
+    background-color: $background;
+    border-color: $border;
+    &:hover {
+        color: $hover-color;
+        background-color: $hover-background;
+        border-color: $hover-border;
+    }
+    &:focus,
+    &.focus {
+        box-shadow: 0 0 0 $btn-focus-width rgba($border, .5);
+    }
+
+    // Disabled comes first so active can properly restyle
+    &.disabled,
+    &:disabled {
+        color: $color;
+        background-color: $background;
+        border-color: $border;
+    }
+    &:not(:disabled):not(.disabled):active,
+    &:not(:disabled):not(.disabled).active,
+        .show > &.dropdown-toggle {
+            color: $color;
+            background-color: $active-background;
+            border-color: $active-border;
+            &:focus {
+            box-shadow: 0 0 0 $btn-focus-width rgba($border, .5);
+        }
+    }
+}

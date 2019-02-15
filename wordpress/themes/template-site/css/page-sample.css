@@ -1,0 +1,63 @@
+/* Function "clear_h_p_padding_margin"
+ * clear all padding, margin values for hx tages and p tag
+ */
+/* Function "absFull"
+ * position absolute and then full size
+ */
+/* Function 
+ * "absLeftTop"     "absCenterTop"      "absRightTop"
+ * "absLeftCenter"  "absCenterCenter"   "absRightCenter"
+ * "absLeftBottom"  "absCenterBottom"   "absRightBottom"
+ * position absolute and then set the position
+ */
+/* absLeftTop
+    +--
+    ---
+    ---
+ */
+/* absCenterTop
+    -+-
+    ---
+    ---
+ */
+/* absRightTop
+    --+
+    ---
+    ---
+ */
+/* absLeftCenter
+    ---
+    +--
+    ---
+ */
+/* absCenterCenter
+    ---
+    -+-
+    ---
+ */
+/* absRightCenter
+    ---
+    --+
+    ---
+ */
+/* absLeftBottom
+    ---
+    ---
+    +--
+ */
+/* absCenterBottom
+    ---
+    ---
+    -+-
+ */
+/* absRightBottom
+    ---
+    ---
+    --+
+ */
+/* Function "transHoverCBg" "transHover"
+ * set transition value
+ */
+/* Function "userSelect"
+ * set user-select value
+ */
