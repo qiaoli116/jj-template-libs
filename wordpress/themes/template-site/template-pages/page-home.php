@@ -1,5 +1,5 @@
 <?php
-/*Template Name: Page Home
+/*Template Name: Home Page
 
 */
 ?>
@@ -7,6 +7,7 @@
 
 
 <?php get_header(); ?>
+
 
 <?php
 if(have_posts()) { 

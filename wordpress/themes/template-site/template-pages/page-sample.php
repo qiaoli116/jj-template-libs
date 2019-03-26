@@ -1,5 +1,5 @@
 <?php
-/*Template Name: Page Sample
+/*Template Name: Sample Page
 
 */
 ?>
