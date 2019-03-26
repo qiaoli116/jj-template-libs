@@ -158,9 +158,8 @@
 /* Function "transHoverCBg" "transHover"
  * set transition value
  */
-$transHoverTime : 200ms;
-@mixin trans ($attr) {
-    transition: $attr $transHoverTime ease-in;
+ @mixin trans ($attr, $transTime: 150ms) {
+    transition: $attr $transTime ease-in;
 }
 
 /* Function "userSelect"
@@ -171,4 +170,29 @@ $transHoverTime : 200ms;
     -moz-user-select: none; /* Firefox 2+ */
     -ms-user-select: none; /* IE 10+ */
     user-select: none; /* Standard syntax */
+}
+
+/* Function "aTag"
+ * set a tag
+ */
+@mixin aTag($color, $hover_color, $txtDeco: none, $class: null) {
+    
+    @if $class == null {
+        a {
+            color: $color;
+            &:hover {
+                color: $hover_color;
+                text-decoration: $txtDeco;
+            }
+        }
+    } @else {
+        a.#{$class} {
+            color: $color;
+            &:hover {
+                color: $hover_color;
+                text-decoration: $txtDeco;
+            }
+        }
+    }
+
 }

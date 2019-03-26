@@ -149,7 +149,7 @@ function wpse_nav_menu_2_tree( $menu_id ){
  */
 function get_current_template( $echo = false ) {
     if ( !isset( $GLOBALS['current_theme_template'] ) ) {
-        trigger_error( '$current_theme_template has not been defined yet', E_USER_WARNING );
+        //trigger_error( '$current_theme_template has not been defined yet', E_USER_WARNING );
         return false;
     }
     if ( $echo ) {
