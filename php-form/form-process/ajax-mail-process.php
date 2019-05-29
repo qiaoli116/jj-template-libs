@@ -49,29 +49,35 @@ if( $name == "" || $phone == "" || $email == "" || $msg == "") {
 
 try {
     //Server settings
-    $mail->SMTPDebug = 0;                                 // Enable verbose debug output
-    $mail->isSMTP();                                      // Set mailer to use SMTP
+    $mail->SMTPDebug = 0;                                                   // Enable verbose debug output
+    $mail->isSMTP();                                                        // Set mailer to use SMTP
    
-    $mail->SMTPAuth = true;                               // Enable SMTP authentication
-    $mail->Username = 'sender@solsticefrankston.com.au';                 // SMTP username
-    $mail->Password = 'BP7V6h{x%!#-';                           // SMTP password
+    // set smtp user name and password
+    $mail->SMTPAuth = true;                                                 // Enable SMTP authentication
+    $mail->Username = 'smtp_name@mail.com';                                 // SMTP username
+    $mail->Password = '************';                                       // SMTP password
     
-    $mail->Host = 'webcloud56.au.syrahost.com';  // Specify main and backup SMTP servers
-    $mail->SMTPSecure = "ssl";                            // Enable TLS encryption, `ssl` also accepted
-    $mail->Port = 465;                                    // TCP port to connect to
-    $mail->addBCC('support@protrio.com.au'); // incase customer could not receive email
-    //$mail->Host = 'mail.solsticefrankston.com.au';  // Specify main and backup SMTP servers
-    //$mail->SMTPSecure = "";                            // Enable TLS encryption, `ssl` also accepted
-    //$mail->Port = 25;                                    // TCP port to connect to
+    $mail->Host = 'smtp.com';                                               // Specify main and backup SMTP servers
+
+    /* enable either ssl or tls according to smtp configuration */
+    /* ssl default port is 587 */
+    //$mail->SMTPSecure = "ssl";                                            // Enable TLS encryption, `ssl` also accepted
+    //$mail->Port = 465;                                                    // TCP port to connect to
+
+    /* tls default port is 587 */
+    // $mail->SMTPSecure = "tls";                                           // Enable TLS encryption, `ssl` also accepted
+    // $mail->Port = 587;                                                   // TCP port to connect to
+
+    $mail->addBCC('someone_else@other.mail.com');                           // incase customer could not receive email
 
     //Recipients
-    $mail->setFrom("sender@solsticefrankston.com.au", "Solstice");
-    $mail->addAddress('llawlor@bigginscott.com.au', 'llawlor');     // Add a recipient
+    $mail->setFrom("smtp_name@mail.com", "Your Name");                      // this from address is associated with smtp setting, usually the same as the smtp user name
+    $mail->addAddress('recipient_name@recipient.com', 'Recipient Name');    // Add a recipient
     $mail->addReplyTo($email, $name);
 
     //Content
     $mail->isHTML(true);                                  // Set email format to HTML
-    $mail->Subject = "[Enquiry From solsticefrankston.com.au]";
+    $mail->Subject = "[Enquiry From ...]";
     $mail->Body    = "
                 <p><strong>New message from</strong> {$name}</p>
                 <p><strong>Phone Number</strong> {$phone}</p>
