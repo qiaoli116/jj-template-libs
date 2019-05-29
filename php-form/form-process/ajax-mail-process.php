@@ -13,15 +13,14 @@ $name = isset($_POST['name'])? $_POST['name'] : "";
 $phone = isset($_POST['phone'])? $_POST['phone'] : "";
 $email = isset($_POST['email'])? $_POST['email'] : "";
 $msg = isset($_POST['msg'])? $_POST['msg'] : "";
-// value fax is a 
-
 
 $result = array(
-        "code" => 0,
-        "des" => "Server error",
-        "debug" => "before trying to send email",
-    );
+    "code" => 0,
+    "des" => "Server error",
+    "debug" => "before trying to send email",
+);
 
+// fax is honeypot, if it is set, the submission is ignored
 if( !(isset($_POST['fax']) && $_POST['fax']=="")) {
     $result = array(
         "code"  => 1,
