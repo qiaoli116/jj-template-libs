@@ -1,0 +1,112 @@
+<form id="contact-form">
+    <div class="form-group pt-2">
+        <input type="text" class="form-control" placeholder="Name*" id="name" name="name">
+    </div>
+    <div class="form-group pt-2">
+        <input type="email" class="form-control" placeholder="Email*" id="email"  name="email">
+    </div>
+    <div class="form-group pt-2">
+        <input type="text" class="form-control" placeholder="Mobile*" id="phone" name="phone">
+    </div>
+    <div class="form-group pt-2 d-none">
+        <input type="text" class="form-control" placeholder="Fax*" id="fax" name="fax">
+    </div>
+    <div class="form-group pt-2">
+        <div><label for="msg">Message</label></div>              
+        <textarea class="form-control" id="msg" rows="4" name="msg"></textarea>
+    </div>
+    <div class="d-flex justify-content-center pt-3">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+<script>
+$(function(){
+    $( "form" ).on( "submit", function( event ) {
+        event.preventDefault();
+        sendMail();
+    });
+});
+
+
+
+function sendMail() {
+    if(!inputValidate()){
+        console.log("not validate");
+        return;
+    }
+    sendingMail();
+    $.post( "form-process/ajax-mail-process.php", $("#contact-form").serialize(), function( data ) {
+        $("#contact-form [type='submit']").html("SUBMIT");
+        console.log( data ); // John
+        if(data.code) {
+            sentMail(true, data.des);
+        } else {
+            sentMail(false, data.des);
+            console.log(data.debug);
+        }
+    }, "json")
+    .fail(function() {
+        sentMail(false, "Something is wrong with the server. Please try again later.");
+    });
+
+}
+
+function sendingMail(){
+    $("#contact-form [type='submit']").html("Sending ...");
+}
+
+function sentMail(success, log) {
+    if (success) {
+        $("#form-result .modal-title").html("Message has been sent!");
+        $("#form-result .modal-body").html("<p>Thanks for your message.</p><p>We will be in contact shortly.</p>");
+    } else {
+        $("#form-result .modal-title").html("Message was NOT sent!");
+        $("#form-result .modal-body").html("<p>Reason: </p><p>"+log+"</p>");
+    }
+    $('#form-result').modal('show');
+    $("#contact-form [type='submit']").html("SUBMIT");
+}
+
+function inputValidate () {
+    //return true;
+    var result = true;
+    if($("#name").val() == "") {
+        $("#name").attr("placeholder", "Name can't be empty");
+        $("#name").addClass("m-failed");
+        result &= false;
+    } else {
+        $("#name").attr("placeholder", "Name");
+        $("#name").removeClass("m-failed");
+        result &= true;
+    }
+    if($("#phone").val() == "") {
+        $("#phone").attr("placeholder", "Phone can't be empty");
+        $("#phone").addClass("m-failed");
+        result &= false;
+    } else {
+        $("#phone").attr("placeholder", "Phone");
+        $("#phone").removeClass("m-failed");
+        result &= true;
+    }
+    if($("#email").val() == "") {
+        $("#email").attr("placeholder", "Email can't be empty");
+        $("#email").addClass("m-failed");
+        result &= false;
+    } else {
+        $("#email").attr("placeholder", "Email");
+        $("#email").removeClass("m-failed");
+        result &= true;
+    }
+    if($("#msg").val() == "") {
+        $("#msg").attr("placeholder", "Message can't be empty");
+        $("#msg").addClass("m-failed");
+        result &= false;
+    } else {
+        $("#msg").attr("placeholder", "Message");
+        $("#msg").removeClass("m-failed");
+        result &= true;
+    }
+    return result;
+}
+
+</script>
