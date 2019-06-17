@@ -8,29 +8,21 @@
  */
 
 get_header();
+$post_data = false;
+while ( have_posts() ) :
+    $id = get_the_ID();
+    // all other data are accessable with the id
+    $cat = get_the_category($id);
+    $post_data = array(
+        "title" => get_the_title($id),
+        "content" => wpautop(get_the_content(null, true)),
+        "link" => get_the_permalink($id),
+        "date" => get_the_date('j/n/Y', $id),
+    );
+    break;
+endwhile; // End of the loop.
 ?>
 
-	<div id="primary" class="content-area">
-		<main id="main" class="site-main">
-
-		<?php
-		while ( have_posts() ) :
-			the_post();
-
-			get_template_part( 'template-parts/content', get_post_type() );
-
-			the_post_navigation();
-
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
-
-		endwhile; // End of the loop.
-		?>
-
-		</main><!-- #main -->
-	</div><!-- #primary -->
 
 <?php
 get_sidebar();
